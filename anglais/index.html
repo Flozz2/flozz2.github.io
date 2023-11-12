@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anglais</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+<body>
+    <h1>Anglais</h1>
+    <nav id="navbar-container"></nav>
+
+    <nav>
+        <ul>
+            <li><a href="colonnes3-4.html">colonnes 1 et 2</a> (not yet implemented)</li>
+            <li><a href="colonnes3-4.html">colonnes 3 et 4</a></li>
+        </ul>
+    </nav>
+
+    <script>
+        $(function () {
+            // Use jQuery to load the navbar.html content into the #navbar-container
+            $("#navbar-container").load("../navbar.html");
+        });
+    </script>
+</body>
+
+</html>
