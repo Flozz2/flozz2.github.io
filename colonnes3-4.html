@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../quiz.css">
+</head>
+
+<body>
+    <div id="category-container"></div>
+    <div id="quiz-container"></div>
+    <div id="answer-container"></div>
+    <button id="show-answer-btn">Show Answer</button>
+    <button id="next-btn">Next Question</button>
+    <script>
+        let quiz = {
+            'condition': {
+                "pourvu que": "as long as/so long as",
+                "même si": "even if",
+                "si": "if",
+                "sinon": "or else/otherwise",
+                "à condition que, pourvu que": "provided",
+                "à moins que": "unless"
+            },
+            'conséquence': {
+                "par conséquent": "consequently/therefore",
+                "donc": "so",
+                "si bien que, de sorte que": "so that",
+                "c'est pourquoi": "that's why",
+                "par conséquent, donc": "thus"
+            },
+            'hypothese': {
+                "au cas où": "in case",
+                "supposons, en supposant que": "suppose/supposing"
+            },
+            'opposition': {
+                "au contraire": "on the contrary",
+                "si ... que": "though",
+                "à l'inverse de, contrairement à, à la différence de": "unlike",
+                "alors que, tandis que": "whereas/while"
+            },
+            'restriction': {
+                "malgré tout, malgré cela, quand même": "all the same"
+            },
+            'temps': {
+                "comme, alors que, au moment où": "as",
+                "dès que, aussitôt que": "as soon as",
+                "pendant/depuis": "for",
+                "pendant ce temps": "meanwhile/in the meantime",
+                "une fois (que)": "once",
+                "depuis": "since",
+                "jusqu'à (ce que)": "till/until",
+                "quand": "when",
+                "pendant que": "while",
+                "déjà/encore": "yet"
+            }
+        };
+
+        let categories = Object.keys(quiz);
+        let questionsPerCategory = 2; // Set the desired number of questions per category
+        let questionsAnswered = {};
+        let currentCategoryIndex = 0;
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let categoryContainer = document.getElementById('category-container');
+        let quizContainer = document.getElementById('quiz-container');
+        let answerContainer = document.getElementById('answer-container');
+        let showAnswerButton = document.getElementById('show-answer-btn');
+        let nextButton = document.getElementById('next-btn');
+
+        function showQuestion() {
+            quizContainer.innerHTML = currentQuestions[currentQuestionIndex];
+        }
+
+        function showAnswer() {
+            answerContainer.innerHTML = quiz[categories[currentCategoryIndex]][currentQuestions[currentQuestionIndex]];
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < currentQuestions.length - 1) {
+                // Display the next question in the current category
+                currentQuestionIndex++;
+                showQuestion();
+                answerContainer.innerHTML = '';
+            } else {
+                // All questions in the current category have been displayed the desired number of times
+                questionsAnswered[categories[currentCategoryIndex]]++;
+                if (questionsAnswered[categories[currentCategoryIndex]] >= questionsPerCategory) {
+                    // Move to the next category
+                    currentCategoryIndex = (currentCategoryIndex + 1) % categories.length;
+                    questionsAnswered[categories[currentCategoryIndex]] = 0; // Reset the question count for the new category
+                    shuffleQuestions();
+                }
+                currentQuestionIndex = 0;
+                showQuestion();
+                answerContainer.innerHTML = '';
+                categoryContainer.innerHTML = categories[currentCategoryIndex];
+            }
+        }
+
+        function shuffleQuestions() {
+            currentQuestions = Object.keys(quiz[categories[currentCategoryIndex]]).sort(() => Math.random() - 0.5);
+        }
+
+        showAnswerButton.addEventListener('click', function () {
+            showAnswer();
+        });
+
+        nextButton.addEventListener('click', function () {
+            nextQuestion();
+        });
+
+        // Initial setup
+        shuffleQuestions();
+        showQuestion();
+        categoryContainer.innerHTML = categories[currentCategoryIndex];
+        questionsAnswered[categories[currentCategoryIndex]] = 0; // Initialize question count for the current category
+
+    </script>
+</body>
+
+</html>
