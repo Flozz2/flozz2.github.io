@@ -7,8 +7,9 @@ div {
 
 button {
     border-style: inset;
-    height: 20%;
+    height: auto;
     font-size: 1rem;
     width: 50%;
     margin-left: 25%;
+    margin-top: 10%;
 }
