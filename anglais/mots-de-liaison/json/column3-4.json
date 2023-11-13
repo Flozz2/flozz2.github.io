@@ -1,0 +1,42 @@
+{
+    "condition": {
+        "pourvu que": "as long as/so long as",
+        "même si": "even if",
+        "si": "if",
+        "sinon": "or else/otherwise",
+        "à condition que, pourvu que": "provided",
+        "à moins que": "unless"
+    },
+    "conséquence": {
+        "par conséquent": "consequently/therefore",
+        "donc": "so",
+        "si bien que, de sorte que": "so that",
+        "c'est pourquoi": "that's why",
+        "par conséquent, donc": "thus"
+    },
+    "hypothese": {
+        "au cas où": "in case",
+        "supposons, en supposant que": "suppose/supposing"
+    },
+    "opposition": {
+        "au contraire": "on the contrary",
+        "si ... que": "though",
+        "à l'inverse de, contrairement à, à la différence de": "unlike",
+        "alors que, tandis que": "whereas/while"
+    },
+    "restriction": {
+        "malgré tout, malgré cela, quand même": "all the same"
+    },
+    "temps": {
+        "comme, alors que, au moment où": "as",
+        "dès que, aussitôt que": "as soon as",
+        "pendant/depuis": "for",
+        "pendant ce temps": "meanwhile/in the meantime",
+        "une fois (que)": "once",
+        "depuis": "since",
+        "jusqu'à (ce que)": "till/until",
+        "quand": "when",
+        "pendant que": "while",
+        "déjà/encore": "yet"
+    }
+}
