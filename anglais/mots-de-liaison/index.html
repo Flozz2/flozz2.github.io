@@ -58,6 +58,11 @@
             fetch('json/' + jsonFile)
                 .then(response => response.json())
                 .then(data => {
+                    questionsPerCategory = 2;
+                    questionsAnswered = {};
+                    currentCategoryIndex = 0;
+                    currentQuestions = [];
+                    currentQuestionIndex = 0;
                     quiz = data;
                     categories = Object.keys(quiz);
                     shuffleQuestions();
