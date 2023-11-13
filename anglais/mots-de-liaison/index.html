@@ -55,6 +55,7 @@
                     showQuestion();
                     categoryContainer.innerHTML = categories[currentCategoryIndex];
                     questionsAnswered[categories[currentCategoryIndex]] = 0;
+                    answerContainer.innerHTML = '';
                 })
                 .catch(error => console.error('Error loading JSON:', error));
         }
