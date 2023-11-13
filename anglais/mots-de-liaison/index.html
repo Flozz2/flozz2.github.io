@@ -33,7 +33,7 @@
 
 
         let categories;
-        let questionsPerCategory = 2;
+        let categoryReplayNumber = 2;
         let questionsAnswered = {};
         let currentCategoryIndex = 0;
         let currentQuestions = [];
@@ -58,7 +58,7 @@
             fetch('json/' + jsonFile)
                 .then(response => response.json())
                 .then(data => {
-                    questionsPerCategory = 2;
+                    categoryReplayNumber = 2;
                     questionsAnswered = {};
                     currentCategoryIndex = 0;
                     currentQuestions = [];
@@ -96,7 +96,7 @@
                 answerContainer.innerHTML = '';
             } else {
                 questionsAnswered[categories[currentCategoryIndex]]++;
-                if (questionsAnswered[categories[currentCategoryIndex]] >= questionsPerCategory) {
+                if (questionsAnswered[categories[currentCategoryIndex]] >= categoryReplayNumber) {
                     currentCategoryIndex = (currentCategoryIndex + 1) % categories.length;
                     questionsAnswered[categories[currentCategoryIndex]] = 0;
                     shuffleQuestions();
