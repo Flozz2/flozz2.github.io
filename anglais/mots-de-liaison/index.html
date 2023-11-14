@@ -13,17 +13,20 @@
 <body>
     <h1>Quiz Anglais</h1>
     <nav id="navbar-container"></nav>
-    <div id="category-container"></div>
-    <div id="quiz-container"></div>
-    <div id="answer-container"></div>
-    <button id="show-answer-btn">Show Answer</button>
-    <button id="next-btn">Next Question</button>
-    <button id="load-json-btn">Load Quiz</button>
-    <select id="json-selector">
-        <option value="column1-2.json">Column 1-2</option>
-        <option value="column3-4.json">Column 3-4</option>
-        <!-- Add more options for additional JSON files as needed -->
-    </select>
+
+    <div class="grid-container">
+        <div class="grid-item" id="category-container"></div>
+        <div class="grid-item" id="quiz-container"></div>
+        <div class="grid-item" id="answer-container"></div>
+        <button class="grid-item" id="show-answer-btn">Show Answer</button>
+        <button class="grid-item" id="next-btn">Next Question</button>
+        <button class="grid-item" id="load-json-btn">Load Quiz</button>
+        <select class="grid-item" id="json-selector">
+            <option value="column1-2.json">Column 1-2</option>
+            <option value="column3-4.json">Column 3-4</option>
+            <!-- Add more options for additional JSON files as needed -->
+        </select>
+    </div>
 
     <script>
         $(function () {
