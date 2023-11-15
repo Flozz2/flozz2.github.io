@@ -13,7 +13,7 @@ button {
     background-color: rgb(100, 100, 255);
     color: white;
     border-radius: 10px;
-    width: 60%;
+    width: min(20rem, 40%);
     justify-self: center;
 }
 
