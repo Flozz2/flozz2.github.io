@@ -11,23 +11,25 @@
 </head>
 
 <body>
-    <h1>Quiz Anglais</h1>
-    <nav id="navbar-container"></nav>
-
-    <div class="grid-container">
-        <div class="grid-item" id="category-container"></div>
-        <div class="grid-item" id="quiz-container"></div>
-        <div class="grid-item" id="answer-container"></div>
-        <button class="grid-item" id="show-answer-btn">Show Answer</button>
-        <button class="grid-item" id="next-btn">Next Question</button>
-        <button class="grid-item" id="load-json-btn">Load Quiz</button>
-        <select class="grid-item" id="json-selector">
-            <option value="column1-2.json">Column 1-2</option>
-            <option value="column3-4.json">Column 3-4</option>
-            <!-- Add more options for additional JSON files as needed -->
-        </select>
+    <header>
+        <h1>Quiz Anglais</h1>
+        <nav id="navbar-container"></nav>
+    </header>
+    <div class="main-content">
+        <div class="grid-container">
+            <div class="grid-item" id="category-container"></div>
+            <div class="grid-item" id="quiz-container"></div>
+            <div class="grid-item" id="answer-container"></div>
+            <button class="grid-item" id="show-answer-btn">Show Answer</button>
+            <button class="grid-item" id="next-btn">Next Question</button>
+            <button class="grid-item" id="load-json-btn">Load Quiz</button>
+            <select class="grid-item" id="json-selector">
+                <option value="column1-2.json">Column 1-2</option>
+                <option value="column3-4.json">Column 3-4</option>
+                <!-- Add more options for additional JSON files as needed -->
+            </select>
+        </div>
     </div>
-
     <script>
         $(function () {
             // Use jQuery to load the navbar.html content into the #navbar-container
