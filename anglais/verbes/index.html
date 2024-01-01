@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Irregular Verbs</title>
+    <link rel="stylesheet" href="/quiz.css">
     <script>
         const irregularVerbs = [
     ['bet', 'bet', 'bet', 'parier'],
@@ -136,42 +137,61 @@
 ];
 
 
-let currentIndex = 0;
-        let currentFormIndex = 0;
+let shuffledVerbs = [];
+        let currentIndex = 0;
+        let currentFormIndex = -1;
+
+        function shuffleVerbs() {
+            shuffledVerbs = irregularVerbs.slice(); // Copy the original list
+            shuffledVerbs.sort(() => Math.random() - 0.5); // Shuffle the list
+            currentIndex = 0;
+            currentFormIndex = -1;
+        }
 
         function displayRandomForm() {
-            const randomVerb = irregularVerbs[currentIndex];
+            if (currentFormIndex === -1 || currentFormIndex === 3) {
+                if (currentFormIndex === 3) currentIndex++; // Move to the next verb if all forms shown
 
-            // Randomly select a form
-            currentFormIndex = Math.floor(Math.random() * 4);
+                if (currentIndex === shuffledVerbs.length) {
+                    alert('All verbs have been displayed!');
+                    return;
+                }
 
-            const forms = ['Infinitive', 'Past Simple', 'Past Participle', 'Translation'];
-            const form = forms[currentFormIndex];
+                currentFormIndex = Math.floor(Math.random() * 3); // Randomly select a form (0-2)
 
-            // Display a random form
-            document.getElementById('verb-display').innerText = `${randomVerb[currentFormIndex]} (${form})`;
+                const randomVerb = shuffledVerbs[currentIndex];
+                const forms = ['Infinitive', 'Past Simple', 'Past Participle', 'Translation'];
+                const form = forms[currentFormIndex];
+
+                document.getElementById('verb-display').innerText = `${randomVerb[currentFormIndex]} (${form})`;
+            } else {
+                alert('Please reveal all forms before moving to the next verb form.');
+            }
         }
 
         function revealAllForms() {
-            const randomVerb = irregularVerbs[currentIndex];
+            if (currentFormIndex !== -1) {
+                const randomVerb = shuffledVerbs[currentIndex];
 
-            // Display all forms and their translations
-            document.getElementById('verb-display').innerText = `${randomVerb[0]}, `
-                + `${randomVerb[1]}, `
-                + `${randomVerb[2]}, `
-                + `${randomVerb[3]}`;
+                document.getElementById('verb-display').innerText = `${randomVerb[0]}, `
+                    + `${randomVerb[1]}, `
+                    + `${randomVerb[2]}, `
+                    + `${randomVerb[3]}`;
 
-            // Move to the next verb for the next iteration
-            currentIndex = (currentIndex + 1) % irregularVerbs.length;
+                currentFormIndex = 3; // Mark all forms revealed
+            } else {
+                alert('Please display a verb form first.');
+            }
         }
     </script>
 </head>
-<body>
+<body onload="shuffleVerbs()">
     <h1>Irregular Verbs</h1>
     <div>
-        <p id="verb-display">Click below to start</p>
-        <button onclick="displayRandomForm()">Next Form</button>
-        <button onclick="revealAllForms()">Reveal All Forms</button>
-    </div>
+        <div class="grid-container">
+        <div id="verb-display" class="grid-item">Click "Next Form" to start</div>
+        <button class="grid-item" onclick="displayRandomForm()">Next Form</button>
+        <button class="grid-item" onclick="revealAllForms()">Reveal All Forms</button>
+    </div></div>
 </body>
 </html>
