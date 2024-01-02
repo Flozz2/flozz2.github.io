@@ -139,7 +139,7 @@
             ['write', 'wrote', 'written', 'écrire']
         ];
 
-
+        let totalAnswered = 0;
         let shuffledVerbs = [];
         let currentIndex = 0;
         let currentFormIndex = -1;
@@ -182,6 +182,8 @@
                     + `${randomVerb[3]}`;
 
                 currentFormIndex = 3; // Mark all forms revealed
+                totalAnswered ++;
+                document.getElementById('total-answered-display').innerHTML = totalAnswered;
             } else {
                 alert('Please display a verb form first.');
             }
@@ -196,6 +198,7 @@
     </header>
     <div class="main-content">
         <div class="grid-container">
+            <div class="grid-item" id="total-answered-display"></div>
             <div id="verb-display" class="grid-item">Click "Next Form" to start</div>
             <button class="grid-item" onclick="displayRandomForm()">Next Form</button>
             <button class="grid-item" onclick="revealAllForms()">Reveal All Forms</button>
