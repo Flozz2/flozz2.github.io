@@ -144,57 +144,49 @@
         let shuffledVerbs = [];
         let currentIndex = 0;
         let currentFormIndex = -1;
-        let formsRevealed = false; // Variable to track if forms are already revealed for the current verb
+        let formsRevealed = false;
 
         function shuffleVerbs() {
             shuffledVerbs = irregularVerbs.slice();
             shuffledVerbs.sort(() => Math.random() - 0.5);
             currentIndex = 0;
             currentFormIndex = -1;
-            formsRevealed = false; // Reset the variable when shuffling verbs
+            formsRevealed = false;
             document.getElementById('total-answered-display').innerText = `0/${totalVerbs}`;
         }
 
-        function displayRandomForm() {
-            if (currentFormIndex === -1 || currentFormIndex === 3) {
-                formsRevealed = false; // Reset the flag when showing the next form
-                currentFormIndex = -1; // Reset the form index to allow displaying the next form
-                displayRandomVerb(); // Show the next random verb
-            } else {
-                alert('Please reveal all forms before moving to the next verb form.');
-            }
-        }
-
-        function displayRandomVerb() {
+        function displayNextVerb() {
             if (currentIndex < shuffledVerbs.length) {
-                const randomVerb = shuffledVerbs[currentIndex];
-                const forms = ['Infinitive', 'Past Simple', 'Past Participle', 'Translation'];
-                const form = forms[++currentFormIndex];
-
-                document.getElementById('verb-display').innerText = `${randomVerb[currentFormIndex]} (${form})`;
+                currentFormIndex = -1;
+                formsRevealed = false;
+                displayNextForm();
             } else {
                 alert('All verbs have been displayed!');
             }
         }
 
+        function displayNextForm() {
+            if (currentIndex < shuffledVerbs.length) {
+                currentIndex++;
+                const randomVerb = shuffledVerbs[currentIndex - 1];
+                const forms = ['Infinitive', 'Past Simple', 'Past Participle', 'Translation'];
+                currentFormIndex = 0;
+                document.getElementById('verb-display').innerText = `${randomVerb[currentFormIndex]} (${forms[currentFormIndex]})`;
+            }
+        }
+
         function revealAllForms() {
-            if (currentFormIndex !== -1 && !formsRevealed) {
-                const randomVerb = shuffledVerbs[currentIndex];
-
-                document.getElementById('verb-display').innerText = `${randomVerb[0]}, `
-                    + `${randomVerb[1]}, `
-                    + `${randomVerb[2]}, `
-                    + `${randomVerb[3]}`;
-
-                currentFormIndex = 3; // Mark all forms revealed
-                formsRevealed = true; // Set the flag to true
+            if (!formsRevealed && currentIndex < shuffledVerbs.length) {
+                const randomVerb = shuffledVerbs[currentIndex - 1];
+                document.getElementById('verb-display').innerText = `${randomVerb[0]}, ${randomVerb[1]}, ${randomVerb[2]}, ${randomVerb[3]}`;
+                currentFormIndex = 3;
+                formsRevealed = true;
                 totalAnswered++;
-
                 document.getElementById('total-answered-display').innerText = `${totalAnswered}/${totalVerbs}`;
-            } else if (currentFormIndex === -1) {
-                alert('Please display a verb form first.');
-            } else {
+            } else if (formsRevealed) {
                 alert('Forms already revealed for the current verb.');
+            } else {
+                alert('All verbs have been displayed!');
             }
         }
     </script>
@@ -208,8 +200,8 @@
     <div class="main-content">
         <div class="grid-container">
             <div class="grid-item" id="total-answered-display">0/0</div>
-            <div id="verb-display" class="grid-item">Click "Next Form" to start</div>
-            <button class="grid-item" onclick="displayRandomForm()">Next Form</button>
+            <div id="verb-display" class="grid-item">Click "Next Verb" to start</div>
+            <button class="grid-item" onclick="displayNextVerb()">Next Verb</button>
             <button class="grid-item" onclick="revealAllForms()">Reveal All Forms</button>
         </div>
     </div>
