@@ -144,19 +144,19 @@
         let shuffledVerbs = [];
         let currentIndex = 0;
         let currentFormIndex = -1;
-        let formsRevealed = false;
+        let formsRevealed = true;
 
         function shuffleVerbs() {
             shuffledVerbs = irregularVerbs.slice();
             shuffledVerbs.sort(() => Math.random() - 0.5);
             currentIndex = 0;
             currentFormIndex = -1;
-            formsRevealed = false;
+            formsRevealed = true;
             document.getElementById('total-answered-display').innerText = `0/${totalVerbs}`;
         }
 
         function displayNextVerb() {
-            if (currentIndex < shuffledVerbs.length) {
+            if (currentIndex < shuffledVerbs.length && formsRevealed) {
                 currentFormIndex = -1;
                 formsRevealed = false;
                 displayNextForm();
