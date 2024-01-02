@@ -140,40 +140,45 @@
         ];
 
         let totalAnswered = 0;
+        const totalVerbs = irregularVerbs.length;
         let shuffledVerbs = [];
         let currentIndex = 0;
         let currentFormIndex = -1;
+        let formsRevealed = false; // Variable to track if forms are already revealed for the current verb
 
         function shuffleVerbs() {
-            shuffledVerbs = irregularVerbs.slice(); // Copy the original list
-            shuffledVerbs.sort(() => Math.random() - 0.5); // Shuffle the list
+            shuffledVerbs = irregularVerbs.slice();
+            shuffledVerbs.sort(() => Math.random() - 0.5);
             currentIndex = 0;
             currentFormIndex = -1;
+            formsRevealed = false; // Reset the variable when shuffling verbs
+            document.getElementById('total-answered-display').innerText = `0/${totalVerbs}`;
         }
 
         function displayRandomForm() {
             if (currentFormIndex === -1 || currentFormIndex === 3) {
-                if (currentFormIndex === 3) currentIndex++; // Move to the next verb if all forms shown
-
-                if (currentIndex === shuffledVerbs.length) {
-                    alert('All verbs have been displayed!');
-                    return;
-                }
-
-                currentFormIndex = Math.floor(Math.random() * 4); // Randomly select a form (0-3)
-
-                const randomVerb = shuffledVerbs[currentIndex];
-                const forms = ['Infinitive', 'Past Simple', 'Past Participle', 'Translation'];
-                const form = forms[currentFormIndex];
-
-                document.getElementById('verb-display').innerText = `${randomVerb[currentFormIndex]} (${form})`;
+                formsRevealed = false; // Reset the flag when showing the next form
+                currentFormIndex = -1; // Reset the form index to allow displaying the next form
+                displayRandomVerb(); // Show the next random verb
             } else {
                 alert('Please reveal all forms before moving to the next verb form.');
             }
         }
 
+        function displayRandomVerb() {
+            if (currentIndex < shuffledVerbs.length) {
+                const randomVerb = shuffledVerbs[currentIndex];
+                const forms = ['Infinitive', 'Past Simple', 'Past Participle', 'Translation'];
+                const form = forms[++currentFormIndex];
+
+                document.getElementById('verb-display').innerText = `${randomVerb[currentFormIndex]} (${form})`;
+            } else {
+                alert('All verbs have been displayed!');
+            }
+        }
+
         function revealAllForms() {
-            if (currentFormIndex !== -1) {
+            if (currentFormIndex !== -1 && !formsRevealed) {
                 const randomVerb = shuffledVerbs[currentIndex];
 
                 document.getElementById('verb-display').innerText = `${randomVerb[0]}, `
@@ -182,10 +187,14 @@
                     + `${randomVerb[3]}`;
 
                 currentFormIndex = 3; // Mark all forms revealed
-                totalAnswered ++;
-                document.getElementById('total-answered-display').innerHTML = totalAnswered;
-            } else {
+                formsRevealed = true; // Set the flag to true
+                totalAnswered++;
+
+                document.getElementById('total-answered-display').innerText = `${totalAnswered}/${totalVerbs}`;
+            } else if (currentFormIndex === -1) {
                 alert('Please display a verb form first.');
+            } else {
+                alert('Forms already revealed for the current verb.');
             }
         }
     </script>
@@ -198,7 +207,7 @@
     </header>
     <div class="main-content">
         <div class="grid-container">
-            <div class="grid-item" id="total-answered-display"></div>
+            <div class="grid-item" id="total-answered-display">0/0</div>
             <div id="verb-display" class="grid-item">Click "Next Form" to start</div>
             <button class="grid-item" onclick="displayRandomForm()">Next Form</button>
             <button class="grid-item" onclick="revealAllForms()">Reveal All Forms</button>
@@ -206,7 +215,6 @@
     </div>
     <script>
         $(function () {
-            // Use jQuery to load the navbar.html content into the #navbar-container
             $("#navbar-container").load("/navbar.html");
         });
     </script>
